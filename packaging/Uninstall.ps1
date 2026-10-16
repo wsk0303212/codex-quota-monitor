@@ -24,7 +24,7 @@ if (-not $NoRegistration) {
     }
 }
 # Delete only this installer's known files. Preserve unrelated files and all user settings.
-foreach ($name in @('CodexQuotaMonitor.exe','CodexQuotaMonitor.exe.previous','Install.cmd','Install.ps1','Uninstall.cmd','README.txt','SHA256SUMS.txt','CodexQuotaMonitor.install.json','Uninstall.ps1')) {
+foreach ($name in @('CodexQuotaMonitor.exe','CodexQuotaMonitor.exe.previous','Install.cmd','Install.ps1','Uninstall.cmd','README.txt','LICENSE.txt','SHA256SUMS.txt','CodexQuotaMonitor.install.json','Uninstall.ps1')) {
     $path=Join-Path $target $name
     if (Test-Path -LiteralPath $path) {Remove-Item -LiteralPath $path}
 }

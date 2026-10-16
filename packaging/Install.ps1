@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Stop'
 $target = [IO.Path]::GetFullPath($InstallDirectory).TrimEnd('\')
 $source = [IO.Path]::GetFullPath($PSScriptRoot).TrimEnd('\')
 $marker = 'CodexQuotaMonitor.install.json'
-$payload = @('CodexQuotaMonitor.exe','Install.cmd','Install.ps1','Uninstall.cmd','Uninstall.ps1','README.txt','SHA256SUMS.txt')
+$payload = @('CodexQuotaMonitor.exe','Install.cmd','Install.ps1','Uninstall.cmd','Uninstall.ps1','README.txt','LICENSE.txt','SHA256SUMS.txt')
 if ($target -eq $source) {throw 'Run the executable directly for portable use; choose a separate installation directory.'}
 if (-not (Test-Path -LiteralPath (Join-Path $source 'CodexQuotaMonitor.exe'))) {throw 'The application payload is missing. Extract the entire ZIP first.'}
 if (Test-Path -LiteralPath $target) {

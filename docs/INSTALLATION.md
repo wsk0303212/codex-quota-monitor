@@ -10,10 +10,10 @@
 
 ## 下载与校验
 
-从仓库 [Releases](https://github.com/wsk0303212/codex-quota-monitor/releases) 下载 `CodexQuotaMonitor-1.7.2-win-x64.zip` 和旁边的 `SHA256SUMS.txt`。私有仓库需要有访问权限的 GitHub 账户。
+从仓库 [Releases](https://github.com/wsk0303212/codex-quota-monitor/releases) 下载 `CodexQuotaMonitor-1.7.3-win-x64.zip` 和旁边的 `SHA256SUMS.txt`。仓库现已公开，可直接下载。
 
 ```powershell
-Get-FileHash .\CodexQuotaMonitor-1.7.2-win-x64.zip -Algorithm SHA256
+Get-FileHash .\CodexQuotaMonitor-1.7.3-win-x64.zip -Algorithm SHA256
 ```
 
 将结果与 Release 中的校验值对比。ZIP 和 exe 暂未进行代码签名；校验和用于核对下载内容，不等同发行者签名。

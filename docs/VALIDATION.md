@@ -2,7 +2,7 @@
 
 ## 本次 GitHub 分发准备
 
-2026-10-16：从仓库源码使用现有 .NET Framework 编译器构建发布文件，在独立输出目录执行 `--self-test`，并核对包内清单和 SHA-256。安装／卸载脚本使用隔离目录验证，不覆盖开发机正在使用的程序、快捷方式或卸载登记。实际结果见 Release 附件 `validation.json`。
+2026-10-16：从仓库源码使用现有 .NET Framework 编译器构建 1.7.3 发布文件，45 项离线检查通过，包含 MIT 文本的安装包通过 21 项隔离检查，并核对包内清单和 SHA-256。安装／卸载脚本不覆盖开发机正在使用的程序、快捷方式或卸载登记。实际结果见 Release 附件 `validation.json`。
 
 ## 已有界面验收
 
@@ -34,7 +34,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\test-package.ps1
 ```
 
-打包脚本编译、执行离线测试、按白名单组装安装 ZIP，并输出包与 exe 的 hash；相同版本的既有输出不会静默覆盖。安装检查脚本在隔离目录覆盖安装、升级、卸载、保留无关文件、拒绝无所有权目录与篡改载荷，共 20 项检查；不操作真实快捷方式和卸载登记。可用 `-ReleaseDirectory` 指定另一输出目录。没有自动配置 GitHub Actions，避免上传或文档变化自动消耗云端 CI 配额。
+打包脚本编译、执行离线测试、按白名单组装安装 ZIP，并输出包与 exe 的 hash；相同版本的既有输出不会静默覆盖。安装检查脚本在隔离目录覆盖安装、升级、卸载、保留无关文件、拒绝无所有权目录与篡改载荷，共 21 项检查；不操作真实快捷方式和卸载登记。可用 `-ReleaseDirectory` 指定另一输出目录。没有自动配置 GitHub Actions，避免上传或文档变化自动消耗云端 CI 配额。
+
+## README 图片
+
+```powershell
+powershell -NoProfile -STA -ExecutionPolicy Bypass -File .\tools\render-previews.ps1 -Executable .\dist\CodexQuotaMonitor.exe
+```
+
+预览脚本使用 exe 中的 WPF 模板及原生任务栏绘制代码，填充固定合成数据。面板动态区为预览脚本构造，图片只说明外观，不能代替运行验收。脚本不启动程序主入口或 CLI，不读取配置、不采样硬件、不截取桌面，不连接真实账户。
 
 ## 当前边界
 

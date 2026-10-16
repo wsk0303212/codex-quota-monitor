@@ -4,9 +4,31 @@
 
 Windows 原生桌面与任务栏监控工具。查看当前 ChatGPT 套餐对应的 Codex 额度、Credits、重置到期、昨日及累计 token，也可把网速、CPU、内存、显卡、硬盘活动率放到任务栏。
 
-**当前应用版本：1.7.2 · Windows x64 · 私有项目**
+**当前应用版本：1.7.3 · Windows x64 · [MIT 开源](LICENSE)**
 
 [下载安装包](https://github.com/wsk0303212/codex-quota-monitor/releases/latest) · [安装与卸载](docs/INSTALLATION.md) · [代码说明](docs/ARCHITECTURE.md) · [验证记录](docs/VALIDATION.md) · [更新记录](CHANGELOG.md)
+
+## 界面预览
+
+以下图片来自程序的界面模板与任务栏绘制代码，填入的是合成演示数据，不代表真实账户、额度或硬件读数。
+
+**紧凑任务栏**：系统指标在左，额度、重置到期和 token 在右。
+
+![任务栏演示](docs/images/taskbar-demo.png)
+
+**额度面板与显示项目选择**：
+
+<p>
+  <img src="docs/images/panel-demo.png" alt="额度面板，演示数据" width="330" />
+  <img src="docs/images/taskbar-settings-demo.png" alt="任务栏显示项目设置，演示数据" width="360" />
+</p>
+
+<details>
+<summary>查看常规设置</summary>
+
+<img src="docs/images/settings-demo.png" alt="刷新、外观、比例和位置设置，演示数据" width="420" />
+
+</details>
 
 ## 能做什么
 
@@ -72,6 +94,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1
 
 ## 问题反馈与授权
 
-在本私有仓库提交 Issue，附应用／Windows／CLI 版本及复现步骤；不要附 `auth.json`、配置、原始账户响应或未经检查的截图。
+欢迎提交 Issue 或 Pull Request，附应用／Windows／CLI 版本及复现步骤；不要附 `auth.json`、配置、原始账户响应或未经检查的截图。
 
-本项目不是 OpenAI 官方应用。仓库未授予开源许可，授权范围见 [项目声明](NOTICE.md)。
+本项目按 [MIT License](LICENSE) 开源，允许使用、修改、分发及商业使用，须保留版权和许可声明。软件按原样提供。它不是 OpenAI 官方应用，详见 [项目声明](NOTICE.md)。

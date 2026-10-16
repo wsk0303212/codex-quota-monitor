@@ -2,7 +2,8 @@ param([string]$ReleaseDirectory = (Join-Path (Split-Path $PSScriptRoot -Parent) 
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $release=[IO.Path]::GetFullPath($ReleaseDirectory)
-$zipPath=Join-Path $release 'CodexQuotaMonitor-1.7.2-win-x64.zip'
+$package=Get-Content -LiteralPath (Join-Path $release 'validation.json') -Raw | ConvertFrom-Json
+$zipPath=Join-Path $release $package.Package
 $test=Join-Path (Join-Path $root 'artifacts') ('package-test-'+[Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $test | Out-Null
 $extract=Join-Path $test 'extracted package'
@@ -15,7 +16,7 @@ $before=if(Test-Path -LiteralPath $config){(Get-FileHash -LiteralPath $config).H
 $registry='HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\CodexQuotaMonitor'
 $regBefore=if(Test-Path -LiteralPath $registry){Get-ItemProperty -LiteralPath $registry|ConvertTo-Json -Compress}else{$null}
 $files=@(Get-ChildItem -LiteralPath $extract -File)
-Check 'zip-contains-only-seven-distributable-files' ($files.Count -eq 7)
+Check 'zip-contains-only-eight-distributable-files' ($files.Count -eq 8)
 foreach($line in Get-Content -LiteralPath (Join-Path $extract 'SHA256SUMS.txt')){
     Check 'payload-checksum' ((Get-FileHash -LiteralPath (Join-Path $extract $line.Substring(66))).Hash -eq $line.Substring(0,64))
 }

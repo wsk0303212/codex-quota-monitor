@@ -6,6 +6,7 @@
 !/CHANGELOG.md
 !/PRIVACY.md
 !/NOTICE.md
+!/LICENSE
 !/build.ps1
 !/src/
 !/assets/
@@ -15,6 +16,7 @@
 /tools/*
 !/tools/package.ps1
 !/tools/test-package.ps1
+!/tools/render-previews.ps1
 !/tools/make-icon.ps1
 !/tools/desktop-shortcut.ps1
 !/tools/inspect-taskbar.ps1

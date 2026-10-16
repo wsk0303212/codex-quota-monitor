@@ -18,6 +18,7 @@ if ((Test-Path -LiteralPath $stage) -or (Test-Path -LiteralPath $zipPath)) {thro
 New-Item -ItemType Directory -Path $stage | Out-Null
 Copy-Item -LiteralPath $exe -Destination (Join-Path $stage 'CodexQuotaMonitor.exe')
 foreach ($file in @('Install.cmd','Install.ps1','Uninstall.cmd','Uninstall.ps1')) {Copy-Item -LiteralPath (Join-Path $root ('packaging\'+$file)) -Destination (Join-Path $stage $file)}
+Copy-Item -LiteralPath (Join-Path $root 'LICENSE') -Destination (Join-Path $stage 'LICENSE.txt')
 $readme=@'
 Codex Quota Monitor
 Windows x64 / .NET Framework 4.8 or later
@@ -36,7 +37,7 @@ Do not supply an API key to this application.
 
 The ZIP and executable are not code-signed. SHA256SUMS.txt verifies payload integrity;
 the separate release SHA256SUMS.txt verifies the downloaded ZIP.
-This is a private community utility, not an official OpenAI application.
+MIT licensed; see LICENSE.txt. This is an independent utility, not an official OpenAI application.
 
 Chinese installation guide, source and validation:
 https://github.com/wsk0303212/codex-quota-monitor
