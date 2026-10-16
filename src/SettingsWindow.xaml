@@ -1,0 +1,83 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="额度监控设置" Width="460" Height="700" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Microsoft YaHei UI, Segoe UI" FontSize="13" Background="{DynamicResource SettingsSurface}" Foreground="{DynamicResource Ink}" UseLayoutRounding="True" SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="Grayscale">
+ <Window.Resources>
+  <SolidColorBrush x:Key="SettingsSurface" Color="#F3F5F5"/>
+  <SolidColorBrush x:Key="Card" Color="#FFFFFF"/>
+  <SolidColorBrush x:Key="Ink" Color="#171B20"/>
+  <SolidColorBrush x:Key="Muted" Color="#69737D"/>
+  <SolidColorBrush x:Key="Line" Color="#DCE3E1"/>
+  <SolidColorBrush x:Key="Accent" Color="#536967"/>
+  <SolidColorBrush x:Key="AccentInk" Color="#FFFFFF"/>
+  <SolidColorBrush x:Key="Hover" Color="#E8EEEC"/>
+  <Style TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Ink}"/></Style>
+  <Style x:Key="CardStyle" TargetType="Border"><Setter Property="Background" Value="{DynamicResource Card}"/><Setter Property="BorderBrush" Value="{DynamicResource Line}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="12"/><Setter Property="Padding" Value="15,12"/><Setter Property="Margin" Value="0,0,0,10"/></Style>
+  <Style TargetType="Button">
+   <Setter Property="Background" Value="{DynamicResource Card}"/><Setter Property="Foreground" Value="{DynamicResource Ink}"/><Setter Property="BorderBrush" Value="{DynamicResource Line}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="Padding" Value="15,8"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="ButtonBorder" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ButtonBorder" Property="Opacity" Value="0.8"/></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource Accent}"/></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.5"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style TargetType="TextBox"><Setter Property="Foreground" Value="{DynamicResource Ink}"/><Setter Property="Background" Value="{DynamicResource SettingsSurface}"/><Setter Property="BorderBrush" Value="{DynamicResource Line}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="Padding" Value="9,6"/><Setter Property="VerticalContentAlignment" Value="Center"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TextBox"><Border x:Name="InputBorder" CornerRadius="7" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"><ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/></Border><ControlTemplate.Triggers><Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource Accent}"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>
+  <Style TargetType="ComboBoxItem"><Setter Property="Foreground" Value="{DynamicResource Ink}"/><Setter Property="Padding" Value="10,7"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ComboBoxItem"><Border x:Name="ItemBorder" Background="Transparent" CornerRadius="5" Padding="{TemplateBinding Padding}"><ContentPresenter/></Border><ControlTemplate.Triggers><Trigger Property="IsHighlighted" Value="True"><Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource Hover}"/></Trigger><Trigger Property="IsSelected" Value="True"><Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource Hover}"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>
+  <Style TargetType="ComboBox"><Setter Property="Foreground" Value="{DynamicResource Ink}"/><Setter Property="Height" Value="34"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ComboBox"><Grid>
+   <Border x:Name="ComboBorder" CornerRadius="7" BorderBrush="{DynamicResource Line}" BorderThickness="1" Background="{DynamicResource SettingsSurface}"/>
+   <ContentPresenter Margin="10,0,28,0" VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" IsHitTestVisible="False"/>
+   <TextBlock Text="⌄" Margin="0,0,10,2" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{DynamicResource Muted}" IsHitTestVisible="False"/>
+   <ToggleButton Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"><ToggleButton.Template><ControlTemplate TargetType="ToggleButton"><Border Background="Transparent"/></ControlTemplate></ToggleButton.Template></ToggleButton>
+   <Popup x:Name="PART_Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False"><Border Background="{DynamicResource Card}" BorderBrush="{DynamicResource Line}" BorderThickness="1" CornerRadius="8" Padding="4" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"><ScrollViewer MaxHeight="220"><ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/></ScrollViewer></Border></Popup>
+  </Grid><ControlTemplate.Triggers><Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ComboBorder" Property="BorderBrush" Value="{DynamicResource Accent}"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>
+  <Style TargetType="CheckBox"><Setter Property="Foreground" Value="{DynamicResource Ink}"/><Setter Property="VerticalContentAlignment" Value="Center"/><Setter Property="Cursor" Value="Hand"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="CheckBox"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="18"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Border x:Name="CheckBorder" Width="17" Height="17" CornerRadius="4" Background="{DynamicResource Card}" BorderBrush="{DynamicResource Line}" BorderThickness="1"><Path x:Name="CheckMark" Visibility="Collapsed" Data="M 3,8 L 6,11 L 12,4" Stroke="{DynamicResource AccentInk}" StrokeThickness="1.8"/></Border><ContentPresenter Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center"/></Grid><ControlTemplate.Triggers><Trigger Property="IsChecked" Value="True"><Setter TargetName="CheckBorder" Property="Background" Value="{DynamicResource Accent}"/><Setter TargetName="CheckBorder" Property="BorderBrush" Value="{DynamicResource Accent}"/><Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="CheckBorder" Property="BorderBrush" Value="{DynamicResource Accent}"/></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.45"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>
+  <Style TargetType="Slider"><Setter Property="Height" Value="22"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Slider"><Grid VerticalAlignment="Center"><Border Height="3" CornerRadius="2" Background="{DynamicResource Line}"/><Track x:Name="PART_Track"><Track.DecreaseRepeatButton><RepeatButton Command="Slider.DecreaseLarge"><RepeatButton.Template><ControlTemplate><Border Height="3" CornerRadius="2" Background="{DynamicResource Accent}"/></ControlTemplate></RepeatButton.Template></RepeatButton></Track.DecreaseRepeatButton><Track.Thumb><Thumb><Thumb.Template><ControlTemplate><Border Width="13" Height="13" CornerRadius="7" Background="{DynamicResource Accent}" BorderBrush="{DynamicResource Card}" BorderThickness="2"/></ControlTemplate></Thumb.Template></Thumb></Track.Thumb><Track.IncreaseRepeatButton><RepeatButton Command="Slider.IncreaseLarge"><RepeatButton.Template><ControlTemplate><Border Background="Transparent"/></ControlTemplate></RepeatButton.Template></RepeatButton></Track.IncreaseRepeatButton></Track></Grid></ControlTemplate></Setter.Value></Setter></Style>
+ </Window.Resources>
+ <Border BorderBrush="{DynamicResource Line}" BorderThickness="1" CornerRadius="14" Padding="22,16" RenderOptions.ClearTypeHint="Enabled">
+  <Grid><Grid.RowDefinitions><RowDefinition Height="98"/><RowDefinition Height="*"/><RowDefinition Height="56"/></Grid.RowDefinitions>
+   <Grid x:Name="SettingsHeader"><StackPanel><TextBlock Text="监控设置" FontSize="22" FontWeight="SemiBold"/><TextBlock Text="调整显示、刷新和额度提醒" FontSize="12" Foreground="{DynamicResource Muted}" Margin="0,5,0,0"/></StackPanel><Button x:Name="CloseSettings" Content="×" FontSize="22" Padding="8,0" BorderThickness="0" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" AutomationProperties.Name="关闭设置"/>
+    <Grid VerticalAlignment="Bottom" Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="8"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Button x:Name="GeneralTab" Content="常规" Padding="10,6"/><Button x:Name="TaskbarTab" Grid.Column="2" Content="任务栏内容" Padding="10,6"/></Grid>
+   </Grid>
+   <ScrollViewer x:Name="SettingsScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel>
+    <Border Style="{StaticResource CardStyle}"><StackPanel>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <StackPanel><TextBlock Text="刷新频率" FontWeight="SemiBold" Margin="0,0,0,7"/><ComboBox x:Name="IntervalChoice"/></StackPanel>
+      <StackPanel Grid.Column="2"><TextBlock Text="外观" FontWeight="SemiBold" Margin="0,0,0,7"/><ComboBox x:Name="ThemeChoice"/></StackPanel>
+     </Grid>
+     <Grid Margin="0,12,0,3"><TextBlock Text="窗口比例"/><TextBlock x:Name="ScaleLabel" HorizontalAlignment="Right" FontWeight="SemiBold"/></Grid>
+     <Slider x:Name="ScaleChoice" Minimum="0.5" Maximum="1.2" TickFrequency="0.05" IsSnapToTickEnabled="True"/>
+     <TextBlock Text="也可按住 Ctrl 滚动鼠标滚轮" FontSize="11" Foreground="{DynamicResource Muted}" Margin="0,2,0,0"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource CardStyle}"><StackPanel><TextBlock Text="显示位置" FontWeight="SemiBold" Margin="0,0,0,10"/>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="29"/><RowDefinition Height="29"/></Grid.RowDefinitions>
+      <CheckBox x:Name="TaskbarChoice" Content="任务栏显示"/><CheckBox x:Name="TaskbarLeftChoice" Grid.Column="1" Content="任务栏靠左" ToolTip="取消勾选时靠右显示"/>
+      <CheckBox x:Name="DockChoice" Grid.Row="1" Content="停靠桌面右下角"/><CheckBox x:Name="TopmostChoice" Grid.Row="1" Grid.Column="1" Content="窗口置顶"/>
+     </Grid>
+    </StackPanel></Border>
+    <Border Style="{StaticResource CardStyle}"><StackPanel><CheckBox x:Name="NotifyChoice" Content="低额度和恢复时提醒" Margin="0,0,0,10"/>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="64"/><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/><ColumnDefinition Width="64"/></Grid.ColumnDefinitions>
+      <TextBlock Text="提醒阈值 %" VerticalAlignment="Center"/><TextBox x:Name="WarningChoice" Grid.Column="1" MaxLength="3" AutomationProperties.Name="提醒阈值百分比"/>
+      <TextBlock Grid.Column="3" Text="较低阈值 %" VerticalAlignment="Center"/><TextBox x:Name="CriticalChoice" Grid.Column="4" MaxLength="3" AutomationProperties.Name="较低阈值百分比"/>
+     </Grid>
+    </StackPanel></Border>
+    <Border Style="{StaticResource CardStyle}" Margin="0"><StackPanel><CheckBox x:Name="StartupChoice" Content="开机启动，收进托盘" Margin="0,0,0,10"/>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel VerticalAlignment="Center"><TextBlock Text="Codex CLI" FontWeight="SemiBold"/><TextBlock x:Name="CliStatus" Text="已检测到 codex.exe" FontSize="11" Foreground="{DynamicResource Muted}" Margin="0,3,10,0"/></StackPanel><Button x:Name="ChooseCli" Grid.Column="1" Content="更换…" Padding="12,6"/></Grid>
+    </StackPanel></Border>
+   </StackPanel></ScrollViewer>
+   <ScrollViewer x:Name="TaskbarSettingsScroll" Grid.Row="1" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel>
+    <TextBlock Text="勾选要显示的项目，任务栏宽度会自动调整。" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,2,0,12"/>
+    <Border Style="{StaticResource CardStyle}"><StackPanel><TextBlock Text="Codex 账户" FontWeight="SemiBold" Margin="0,0,0,12"/>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="34"/><RowDefinition Height="34"/><RowDefinition Height="34"/></Grid.RowDefinitions>
+      <CheckBox x:Name="ShowQuotaChoice" Content="套餐与剩余额度"/><CheckBox x:Name="ShowCreditsChoice" Grid.Column="1" Content="Credits 余额"/>
+      <CheckBox x:Name="ShowResetsChoice" Grid.Row="1" Content="重置次数 / 到期"/><CheckBox x:Name="ShowYesterdayTokensChoice" Grid.Row="1" Grid.Column="1" Content="昨日 token"/>
+      <CheckBox x:Name="ShowTotalTokensChoice" Grid.Row="2" Content="累计 token"/>
+     </Grid>
+    </StackPanel></Border>
+    <Border Style="{StaticResource CardStyle}"><StackPanel><TextBlock Text="系统指标" FontWeight="SemiBold" Margin="0,0,0,12"/>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="34"/><RowDefinition Height="34"/><RowDefinition Height="34"/></Grid.RowDefinitions>
+      <CheckBox x:Name="ShowUploadChoice" Content="↑ 上传速度"/><CheckBox x:Name="ShowDownloadChoice" Grid.Column="1" Content="↓ 下载速度"/>
+      <CheckBox x:Name="ShowCpuChoice" Grid.Row="1" Content="CPU 使用率"/><CheckBox x:Name="ShowMemoryChoice" Grid.Row="1" Grid.Column="1" Content="内存使用率"/>
+      <CheckBox x:Name="ShowGpuChoice" Grid.Row="2" Content="显卡使用率"/><CheckBox x:Name="ShowDiskChoice" Grid.Row="2" Grid.Column="1" Content="硬盘活动率"/>
+     </Grid>
+     <TextBlock Text="每秒读取本机数据；不影响额度刷新频率。" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,8,0,0"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource CardStyle}"><StackPanel><TextBlock x:Name="TaskbarPreview" FontWeight="SemiBold"/><TextBlock Text="未提供的指标显示 —；显卡取最忙引擎，硬盘为活动时间占比。" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,8,0,0"/><TextBlock Text="取消全部勾选将隐藏监控条，仍可从托盘打开设置。" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,6,0,0"/></StackPanel></Border>
+   </StackPanel></ScrollViewer>
+   <Grid Grid.Row="2" VerticalAlignment="Bottom"><TextBlock Text="保存后立即生效" FontSize="11" Foreground="{DynamicResource Muted}" VerticalAlignment="Center"/><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button x:Name="CancelSettings" Content="取消" Width="74" Margin="0,0,9,0"/><Button x:Name="SaveSettings" Content="保存" Width="88" Background="{DynamicResource Accent}" Foreground="{DynamicResource AccentInk}" BorderBrush="{DynamicResource Accent}"/></StackPanel></Grid>
+  </Grid>
+ </Border>
+</Window>
+

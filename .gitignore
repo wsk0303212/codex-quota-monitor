@@ -1,0 +1,28 @@
+# Publish only project source and distributable documentation.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/CHANGELOG.md
+!/PRIVACY.md
+!/NOTICE.md
+!/build.ps1
+!/src/
+!/assets/
+!/docs/
+!/packaging/
+!/tools/
+/tools/*
+!/tools/package.ps1
+!/tools/test-package.ps1
+!/tools/make-icon.ps1
+!/tools/desktop-shortcut.ps1
+!/tools/inspect-taskbar.ps1
+# Personal data, generated output and local handoff evidence are never tracked.
+**/settings.json*
+**/auth.json
+**/.env*
+**/*.log
+**/test-results.json
+**/probe-result.json
+**/smoke-error.txt
